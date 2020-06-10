@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "AddGroup";
+}
+@model CreateGroupVM
+    <section>
+        <div class="mb-3 text-center">
+            <h1>Add New Product Group</h1>
+        </div>
+        <form class="jumbotron" asp-controller="Team" asp-action="UpdateGroup" method="post">
+            <div class="form-group">
+                <label asp-for=@Model.Title>Group Title</label>
+                <input type="text" asp-for=@Model.Title class="form-control" placeholder="Enter Title" />
+            </div>
+            <div class="form-group">
+                <label asp-for=@Model.Description>Description</label>
+                <input type="text" asp-for=@Model.Description class="form-control" placeholder="Enter Description" />
+            </div>
+            <div class="form-group">
+                <label asp-for=@Model.GeneralThumbnail>General Thumbnail</label>
+                <input type="text" asp-for=@Model.GeneralThumbnail class="form-control" placeholder="Enter Thumbnail URL" />
+            </div>
+            <div class="form-group">
+                <label asp-for=@Model.PrintDesignPNG>Print Design PNG</label>
+                <input type="text" asp-for=@Model.PrintDesignPNG class="form-control" placeholder="Enter Design URL" />
+            </div>
+            <div class="form-group">
+                <label asp-for=@Model.NewTagName>Add New Tag</label>
+                <input type="text" asp-for=@Model.NewTagName class="form-control" placeholder="Enter Custom Tag" />
+            </div>
+            <div class="form-group">
+                <label asp-for=@Model.NewTagName>Add Existing Tag</label>
+                <select asp-for=@Model.ExistingTagID class="form-control">
+                    <option selected value="">Select an Existing Tag</option>
+                    @foreach (var tag in Model.DatabaseTags)
+                    {
+                        <option value=@tag.TagID>@tag.TagLine</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for=@Model.SelectedRosterGroupID>Base Product Group</label>
+                <select asp-for=@Model.SelectedRosterGroupID class="form-control">
+                    <option selected value="">Select Base Group</option>
+                    @foreach (var group in Model.RosterGroups)
+                    {
+                        <option value=@group.RosterGroupID>@group.Title - Model #@group.ModelNumber</option>
+                    }
+                </select>
+            </div>
+            <div class="my-2">
+                <button class="btn btn-primary" type="submit">Update Group</button>
+            </div>
+        </form>
+    </section>
+

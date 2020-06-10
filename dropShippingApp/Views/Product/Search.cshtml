@@ -1,0 +1,154 @@
+@{ ViewData["Title"] = "Search"; }
+@model BrowseViewModel
+@inject IProductSortRepo sortRepo
+
+
+    <section class="pt-5">
+        <div class="panel-body">
+            <h1 style="text-align:center">Search for Products</h1>
+            <form asp-controller="Product" asp-action="Search" method="get">
+                <div class="d-flex flex-row justify-content-center">
+                    <input class="form-control" type="text" placeholder="Search Products" asp-for=@Model.SearchString />
+                    <button class="btn btn-primary" type="submit" style="margin-left: 5px">Search</button>
+                </div>
+            </form>
+            <br />
+
+            @if (Model != null)
+            {
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sort Products
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @if (Model.SearchString != null)
+                        {
+                            @foreach (var sort in sortRepo.Sorts)
+                            {
+                                <a class="dropdown-item" asp-controller="Product" asp-action="SortProductGroups" asp-route-sortId=@sort.SortID asp-route-searchTerm=@Model.SearchString>@sort.SortName</a>
+                            }
+                        }
+                        else
+                        {
+                            @foreach (var sort in sortRepo.Sorts)
+                            {
+                                <a class="dropdown-item" asp-controller="Product" asp-action="SortProductGroups" asp-route-sortId=@sort.SortID asp-route-categoryId=@Model.CurrentProductCategory.ProductCategoryID>@sort.SortName</a>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
+        <br />
+        <br />
+        <hr />
+
+        <div class="text-center p-2">
+            @if (Model == null)
+            {
+                <h5>Search for Products to Get Started</h5>
+            }
+            else if (Model.SearchString != null)
+            {
+                <h5>Results for '@Model.SearchString'</h5>
+            }
+            else if (Model.CurrentProductCategory != null)
+            {
+                <h5>Browsing @Model.CurrentProductCategory.Name Products</h5>
+            }
+            else
+            {
+                <h5>Search for Products or Browse our Sections</h5>
+            }
+        </div>
+
+        @if (Model != null)
+        {
+            @if (Model.ProductGroups.Count != 0)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var group in Model.ProductGroups)
+                        {
+                            <tr>
+                                <td>
+                                    <img width="100" src=@group.GeneralThumbnail />
+                                </td>
+                                <td>@group.Title</td>
+                                <td>@group.GetLowestPrice.ToString("c")</td>
+                                <td>@group.Description</td>
+                                <td>
+                                    <a class="btn btn-link" style="display:inline-block" asp-controller="Product" asp-action="ViewProduct" asp-route-productGroupId="@group.ProductGroupID">View Product</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <br />
+                <div class="row">
+                    @if (Model.PreviousPageExists)
+                    {
+                        @if (Model.SearchString != null)
+                        {
+                            <div class="col-4 text-left">
+                                <a class="btn btn-link text-primary" asp-controller="Product" asp-action="BackToFirstPage" asp-route-searchTerm=@Model.SearchString>First Page</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-4 text-left">
+                                <a class="btn btn-link text-primary" asp-controller="Product" asp-action="BackToFirstPage" asp-route-categoryId=@Model.CurrentProductCategory.ProductCategoryID>First Page</a>
+                            </div>
+                        }
+
+                    }
+                    @if (Model.CurrentPage != 0)
+                    {
+                        @if (Model.SearchString != null)
+                        {
+                            <div class="col-4 text-center">
+                                <a class="btn btn-link text-primary" asp-controller="Product" asp-action="PreviousPage" asp-route-currentPage=@Model.CurrentPage asp-route-searchTerm=@Model.SearchString>Previous Page</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-4 text-center">
+                                <a class="btn btn-link text-primary" asp-controller="Product" asp-action="PreviousPage" asp-route-currentPage=@Model.CurrentPage asp-route-categoryId=@Model.CurrentProductCategory.ProductCategoryID>Previous Page</a>
+                            </div>
+                        }
+                    }
+                    @if (Model.NextPageExists)
+                    {
+                        @if (Model.SearchString != null)
+                        {
+                            <div class="col-4 text-right">
+                                <a class="btn btn-link text-primary" asp-controller="Product" asp-action="NextPage" asp-route-currentPage=@Model.CurrentPage asp-route-categoryId=@Model.CurrentProductCategory.ProductCategoryID>Next Page</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-4 text-right">
+                                <a class="btn btn-link text-primary" asp-controller="Product" asp-action="NextPage" asp-route-currentPage=@Model.CurrentPage asp-route-categoryId=@Model.CurrentProductCategory.ProductCategoryID>Next Page</a>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="text-center">
+                    <h2>0 Products Found</h2>
+                </div>
+            }
+        }
+    </section>

@@ -1,0 +1,80 @@
+﻿@{ 
+    Layout = "_Layout";
+    ViewData["Title"] = "Cart";
+}
+@model CartViewModel;
+
+    <section>
+        <script src="~/js/CartClient.js">
+            console.log('logging cart client class');
+            console.log(CartClient);
+        </script>
+        <script src="https://www.paypal.com/sdk/js?client-id=AZpm9gTt8pFrq0PZoGf_ptllalZ5UtmqOf6vTpcwtIC0lTD09EA5fTyyhwTHoUJNsmKYh4E6IxK7Ky0P"></script>
+
+        <h1 style="text-align:center">@(Model.CartItemVMs.Count == 0 ? "Your Cart Appears to be Empty :(" : "Your Cart")</h1>
+        @foreach (var item in Model.CartItemVMs)
+        {
+            <article class="row">
+                <div class="col-2">
+                    <img width="50" height="50" src=@item.GeneralThumbnail />
+                </div>
+                <div class="col-3">
+                    <h3>@item.ProductTitle</h3>
+                    <p>Selected in @item.CartItem.ProductSelection.BaseProduct.BaseColor.ColorName size @item.CartItem.ProductSelection.BaseProduct.BaseSize.SizeName</p>
+                </div>
+                <div class="col-1">
+                    Quantity  
+                    <input class="qnty_input form-control" type="number" data-cartItemId=@item.CartItem.CartItemID min="1" value=@item.CartItem.Quantity />
+                </div>
+                <div class="col-2">
+                    Subtotal - @((item.CartItem.Quantity * item.CartItem.ProductSelection.CurrentPrice).ToString("c"))
+                </div>
+                <div class="col-2">
+                    <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-cartItemId=@item.CartItem.CartItemID>Remove Item</a>
+                </div>
+            </article>
+        }
+        <h3 style="text-align:center">Your total is: $@Model.CartPrice</h3>
+        <br />
+        <div style="text-align:center">
+            <button class="btn btn-primary" style="text-align:center" onclick="updateCartCallback()">Update Cart</button>
+        </div>
+        <br />
+        <br />
+        <div id="paypal-button-container" style="text-align:center"></div>
+        <script>
+            const serverURL = "https://localhost:44386";
+            paypal.Buttons({
+                createOrder: function () {
+                    return fetch(serverURL + '/Cart/CreateOrder', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        }
+                    }).then(function (res) {
+                        return res.json();
+                    }).then(function (data) {
+                        console.log(data);
+                        return data.id;
+                    });
+                },
+                onApprove: function (data) {
+                    console.log('logging on approve');
+                    console.log(data);
+                    return fetch(serverURL + '/Cart/GetAndSaveOrder', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            orderID: data.orderID
+                        })
+                    }).then(function (res) {
+                        return res.json();
+                    }).then(function (data) {
+                        return data.orderID;
+                    });
+                }
+            }).render('#paypal-button-container');
+        </script>
+    </section>

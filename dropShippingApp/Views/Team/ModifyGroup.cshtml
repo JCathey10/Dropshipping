@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "Modify Group";
+    Layout = "_Layout";
+}
+@model UpdateGroupVM
+
+<section>
+    <div class="mb-3 text-center">
+        <h1>Modifying @Model.Title Group </h1>
+    </div>
+    <form class="jumbotron" asp-controller="Team" asp-action="UpdateGroup" method="post" asp-route-GroupID=@Model.GroupID>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for=@Model.Title>Group Title </label>
+                <input type="text" asp-for=@Model.Title class="form-control" placeholder="Enter Title" />
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for=@Model.Description>Description </label>
+                <input type="text" asp-for=@Model.Description class="form-control" placeholder="Enter Description" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for=@Model.ThumbnailURL>General Thumbnail</label>
+                <input type="text" asp-for=@Model.ThumbnailURL class="form-control" placeholder="Enter Thumbnail URL" />
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for=@Model.NewTagName>Add New Tag</label>
+                <input type="text" asp-for=@Model.NewTagName class="form-control" placeholder="Enter Custom Tag" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for=@Model.ExistingTagID>Add Existing Tag</label>
+                <select asp-for=@Model.ExistingTagID class="form-control">
+                    <option selected value="">Select an Existing Tag</option>
+                    @foreach (var tag in Model.DatabaseTags)
+                    {
+                        <option value=@tag.TagID>@tag.TagLine</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for=@Model.RemovedTagID>Remove Existing Tag</label>
+                <select asp-for=@Model.RemovedTagID class="form-control">
+                    <option selected value="">Select Group Tag to Remove</option>
+                    @foreach (var tag in Model.ExistingGroupTags)
+                    {
+                        <option value=@tag.TagID>@tag.TagLine</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Update Group</button>
+    </form>
+</section>
+
