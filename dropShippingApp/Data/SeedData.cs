@@ -379,7 +379,7 @@ namespace dropShippingApp.Data
                 
                 // ------------------------------------------- ADDING PRODUCT FAMILIES ------------------------------------------- //
                 var groupNames = new string[] { "Best Socks", "Lazy Pants", "Bedazzled Shirts" };
-                var groupDesc = new string[] { "Mhmmmm tasty", "For the morbidly obese", "Extremely cool" };
+                var groupDesc = new string[] { "Tight Fitting", "Loose Fitting", "Extremely Cool" };
                 var groupList = new List<ProductGroup>();
 
                 for (var i = 0; i < 3; i++)
@@ -625,7 +625,7 @@ namespace dropShippingApp.Data
                 
 
                 var userArr = new AppUser[3] { user1, user2, user3 };
-                var userPasswordArr = new String[3] { "WhoaDude123!", "MotherRussia123!", "MeatBallRevolver123!" };
+                var userPasswordArr = new String[3] { "StandardPassword123", "ManagerPassword123", "AdminPassword123" };
                 var roles = new string[3] { "Standard", "Manager", "Admin" };
 
                 // assign passwords and add users to DB

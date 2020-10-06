@@ -22,7 +22,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Team Sports NW</a>
+                <a src="/wwwroot/pictures/tsnw.Final.pdf" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -65,6 +65,7 @@
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <li><a class="nav-link text-dark" asp-controller="RoleAdmin" asp-action="Index"><span class="glyphicon" style="padding-right: 5px"></span>Role Manager</a></li>
+                                    <li><a class="nav-link text-dark" asp-controller="Admin" asp-action="Index"><span class="glyphicon" style="padding-right: 5px"></span>Admin</a></li>
                                 }
 
                                 <li><a class="nav-link text-dark" asp-controller="Account" asp-action="Invoices"><span class="glyphicon" style="padding-right: 5px"></span>View Orders</a></li>
