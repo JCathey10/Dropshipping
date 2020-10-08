@@ -378,7 +378,7 @@ namespace dropShippingApp.Data
 
                 
                 // ------------------------------------------- ADDING PRODUCT FAMILIES ------------------------------------------- //
-                var groupNames = new string[] { "Best Socks", "Lazy Pants", "Bedazzled Shirts" };
+                var groupNames = new string[] { "Socks", "Lazy Pants", "Bedazzled Shirts" };
                 var groupDesc = new string[] { "Tight Fitting", "Loose Fitting", "Extremely Cool" };
                 var groupList = new List<ProductGroup>();
 
@@ -388,8 +388,8 @@ namespace dropShippingApp.Data
                     {
                         Title = groupNames[i],
                         Description = groupDesc[i],
-                        GeneralThumbnail = "https://i.picsum.photos/id/174/200/200.jpg",
-                        PrintDesignPNG = "https://i.picsum.photos/id/174/200/200.jpg",
+                        GeneralThumbnail = "https://picsum.photos/200.jpg",
+                        PrintDesignPNG = "https://picsum.photos/200.jpg",
                         BaseGroupModelNumber = i + 1
                     };
 
@@ -591,8 +591,8 @@ namespace dropShippingApp.Data
                 {
                     FirstName = "Thor69",
                     LastName = "Of Assguard",
-                    UserName = "NoobSlayer",
-                    NormalizedUserName = "NOOBSLAYER",
+                    UserName = "Thor",
+                    NormalizedUserName = "THOR",
                     Email = "standard@test.com",
                     NormalizedEmail = "STANDARD@TEST.COM",
                     DateJoined = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
@@ -602,8 +602,8 @@ namespace dropShippingApp.Data
                 {
                     FirstName = "Straight",
                     LastName = "Fire",
-                    UserName = "Kalashnikov",
-                    NormalizedUserName = "KALASHNIKOV",
+                    UserName = "Manager",
+                    NormalizedUserName = "MANAGER",
                     Email = "manager@test.com",
                     NormalizedEmail = "MANAGER@TEST.COM",
                     DateJoined = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
@@ -614,8 +614,8 @@ namespace dropShippingApp.Data
                 {
                     FirstName = "Luigi",
                     LastName = "Gangsta",
-                    UserName = "ItalianCowboy",
-                    NormalizedUserName = "ITALIANCOWBODY",
+                    UserName = "Luigi",
+                    NormalizedUserName = "LUIGI",
                     Email = "admin@test.com",
                     NormalizedEmail = "ADMIN@TEST.COM",
                     DateJoined = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
