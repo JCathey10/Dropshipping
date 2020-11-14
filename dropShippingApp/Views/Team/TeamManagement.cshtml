@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="~/css/TeamStyles.css" />
 
 <section>
-    <div class="view-team-banner-container">
+    @*<div class="view-team-banner-container">
         @if (Model.Team.BannerImageData != null)
         {
             <img class="view-team-banner-img" src=@string.Concat("https://i.imgur.com/", Model.Team.BannerImageData.PhotoID,".jpg") />
@@ -20,7 +20,7 @@
         <div class="view-team-banner-text ">
             <h1>@Model.Team.Name</h1>
         </div>
-    </div>
+    </div>*@
     <div class="row my-4">
         <div class="col-12 my-5">
             <partial name="~/Views/Shared/_InfoCardPartial.cshtml"

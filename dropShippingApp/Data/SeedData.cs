@@ -378,8 +378,8 @@ namespace dropShippingApp.Data
 
                 
                 // ------------------------------------------- ADDING PRODUCT FAMILIES ------------------------------------------- //
-                var groupNames = new string[] { "Socks", "Lazy Pants", "Bedazzled Shirts" };
-                var groupDesc = new string[] { "Tight Fitting", "Loose Fitting", "Extremely Cool" };
+                var groupNames = new string[] { "Socks", "Pants", "Shirts" };
+                var groupDesc = new string[] { "Tight Fitting", "Loose Fitting", "Athletic" };
                 var groupList = new List<ProductGroup>();
 
                 for (var i = 0; i < 3; i++)
@@ -589,8 +589,8 @@ namespace dropShippingApp.Data
                 // ------------------------------------------- ADDING APP USERS AND ROLES ------------------------------------------- //
                 var user1 = new AppUser
                 {
-                    FirstName = "Thor69",
-                    LastName = "Of Assguard",
+                    FirstName = "Thor",
+                    LastName = "Son of Odin",
                     UserName = "Thor",
                     NormalizedUserName = "THOR",
                     Email = "standard@test.com",
@@ -600,8 +600,8 @@ namespace dropShippingApp.Data
                 };
                 var user2 = new AppUser
                 {
-                    FirstName = "Straight",
-                    LastName = "Fire",
+                    FirstName = "Mario",
+                    LastName = "Mario",
                     UserName = "Manager",
                     NormalizedUserName = "MANAGER",
                     Email = "manager@test.com",
@@ -613,7 +613,7 @@ namespace dropShippingApp.Data
                 var user3 = new AppUser
                 {
                     FirstName = "Luigi",
-                    LastName = "Gangsta",
+                    LastName = "Mario",
                     UserName = "Luigi",
                     NormalizedUserName = "LUIGI",
                     Email = "admin@test.com",
